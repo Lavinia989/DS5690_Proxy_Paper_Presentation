@@ -33,3 +33,4 @@ Proxy-tuning incorporates a fine-tuned smaller model (the expert) and its untune
 
 ## Methodology
 ![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
+
