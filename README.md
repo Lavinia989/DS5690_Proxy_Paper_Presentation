@@ -32,5 +32,26 @@ Proxy-tuning incorporates a fine-tuned smaller model (the expert) and its untune
 - **Applying Logit Adjustments:** Proxy-tuning adjusts the base LM's output logits by superimposing the logit differences derived from the expert and anti-expert models. This process realigns the base LM’s predictions, effectively steering them towards the expert's fine-tuned characteristics.
 
 ## Methodology
+
+Imagine we have a robot (RobotM) who's very good at identifying fruits from pictures, but it's a bit outdated when it comes to recognizing newer varieties of apples. Now, we have another tiny robot (RobotM+) that is not as versatile but is up-to-date with the latest apple varieties. We also have an “anti-robot” (RobotM-) that's really good at pointing out what is definitely not an apple.
+
+Instead of reprogramming Robot-M entirely, which would take a lot of time and resources, you come up with a clever plan. Whenever you show RobotM a picture of an apple, you also show it to RobotM+ and RobotM-. You then adjust RobotM’s answers according to what RobotM+ says and make sure to pull it back if it’s going towards something RobotM- identifies as not an apple.
+
+In this way, RobotM gets better at recognizing new apples by considering the expertise of the smaller robots without the need to be reprogrammed entirely.
+
+Technical Details:
+In the paper, they discuss a concept called "proxy-tuning". The goal is to adjust the outputs of a large language model (referred to as M) by using two smaller models:
+
+- An expert model (M+): This model has been fine-tuned to be good at a certain task.
+- An anti-expert model (M−): This model has been fine-tuned to produce the opposite of the desired outcome.
+- Both M+ and M− are smaller and easier to fine-tune than the large model M.
+
+Here's how it works:
+
+When you give an input xt(like a sentence or question) to the model, you also pass it to both M+ and M−. M+ and M− process the input and produce a set of scores for all possible outputs (like words or phrases that could come next).M+’s scores are added to M’s original scores, and M−’s scores are subtracted from them. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
+After adjusting M’s scores with the scores from M+ and M−, the model uses a function called "softmax" to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
+This method effectively "steers" the large model to produce outputs more like what we want (based on M+) and avoid what we don’t want (based on M−), without having to go through the costly process of fine-tuning M directly.
+
 ![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
+
 
