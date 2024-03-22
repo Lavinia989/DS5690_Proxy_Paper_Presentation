@@ -46,7 +46,7 @@ Here's how it works:
 - M+’s scores are added to M’s original scores, and - M−’s scores are subtracted from them. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
 - After adjusting M’s scores with the scores from M+ and M−, the model uses a function called "softmax" to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
 
-![method section formula ](images/figures/figure_2.png)
+![method section formula ](images/figures/figure_2.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
 This method effectively "steers" the large model to produce outputs more like what we want (based on M+) and avoid what we don’t want (based on M−), without having to go through the costly process of fine-tuning M directly.
 
