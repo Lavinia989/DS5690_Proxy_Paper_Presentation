@@ -9,7 +9,7 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
     - [Characterized Approach](#characterized-approach)
 - [Methodology](#methodology)
 - [Discussion Question for the Class](#discussion-question-for-the-class)
-    - [question #1](#question-1)
+    - [Question #1](#question-1)
 - [Experiments](#experiments)
 - [Pseudocode](#pseudocode)
 - [Code Demonstration](#code-demonstration)
@@ -60,7 +60,7 @@ This method effectively "steers" the large model to produce outputs more like wh
 ![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
 ## Discussion Question for the Class
-### question #1 
+### Question #1 
 Is there any backpropagation happening?
 <details open>
 <summary>Answer</summary>
