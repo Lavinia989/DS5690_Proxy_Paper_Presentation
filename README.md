@@ -68,7 +68,7 @@ The paper does not fully address the inherent limitations of the base large lang
 
 ### Areas for Further Development
 #### Delving into the "Black Box"
-While the paper endeavors to understand the reasoning behind knowledge transfer at the token level, it only scratches the surface of the LLM's internal workings. There is an opportunity for more extensive research to decipher the underlying mechanisms of Proxy-Tuning. A deeper investigation into the "black box" of neural networks could reveal how information flows and transforms, leading to a richer comprehension of the model's behavior and potentially unlocking new methodologies for model steering.
+While the paper endeavors to understand the reasoning behind knowledge transfer at the token level. There is an opportunity for more extensive research to decipher the underlying mechanisms of Proxy-Tuning. A deeper investigation into the "black box" of neural networks could reveal how information flows and transforms, leading to a richer comprehension of the model's behavior and potentially unlocking new methodologies for model steering.
 
 #### Resolving Conflicts Between Multiple Experts
 The combination of different domain-specific experts in Proxy-Tuning raises questions about potential errors and conflicts in guidance. The current paper does not explore the scenario where multiple expert models may provide conflicting adjustments to the base LLM. This could lead to a compromised or confused model output. Future research could develop a framework for conflict resolution or a harmonious integration of insights from multiple experts, enhancing the robustness of the Proxy-Tuning approach.
