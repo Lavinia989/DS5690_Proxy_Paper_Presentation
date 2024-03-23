@@ -79,3 +79,9 @@ While the paper endeavors to understand the reasoning behind knowledge transfer 
 
 #### Resolving Conflicts Between Multiple Experts
 The combination of different domain-specific experts in Proxy-Tuning raises questions about potential errors and conflicts in guidance. The current paper does not explore the scenario where multiple expert models may provide conflicting adjustments to the base LLM. This could lead to a compromised or confused model output. Future research could develop a framework for conflict resolution or a harmonious integration of insights from multiple experts, enhancing the robustness of the Proxy-Tuning approach.
+
+
+## Additional Resources
+
+- GitHub Repository for Proxy Tuning: https://github.com/alisawuffles/proxy-tuning
+- There is a method that is also aim to steer a model's behavior without extensive retraining or fine-tuning. While proxy tuning adjusts the output distribution, steering vectors manipulate the model's internal state. https://www.lesswrong.com/tag/activation-engineering contains a good survey of the ideas and results
