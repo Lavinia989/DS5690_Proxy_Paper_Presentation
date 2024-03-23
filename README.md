@@ -85,3 +85,6 @@ The combination of different domain-specific experts in Proxy-Tuning raises ques
 
 - GitHub Repository for Proxy Tuning: https://github.com/alisawuffles/proxy-tuning
 - There is a method that is also aim to steer a model's behavior without extensive retraining or fine-tuning. While proxy tuning adjusts the output distribution, steering vectors manipulate the model's internal state. https://www.lesswrong.com/tag/activation-engineering contains a good survey of the ideas and results
+- Code example for Proxy tuning: https://lightning.ai/lightning-ai/studios/improve-llms-with-proxy-tuning
+- A deep dive into the paper "Tuning Language Models by Proxy", offering a clear explanation of the process and the benefits of proxy tuning​. https://foundationflow.ai/tune-language-models-with-proxy-tuning/
+- Explore a valuable discussion on Reddit about the paper: https://www.reddit.com/r/LocalLLaMA/comments/19dg8pk/new_paper_proxytuning_an_efficient_alternative_to/
