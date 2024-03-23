@@ -8,8 +8,10 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
     - [Introduction](#introduction)
     - [Characterized Approach](#characterized-approach)
 - [Methodology](#methodology)
+    - [Build Expert and Anti-Expert Models](#build-expert-and-anti-expert-models)
+    - [Question 1](#question-1)
 - [Discussion Question for the Class](#discussion-question-for-the-class)
-    - [Question #1](#question-1)
+    - [Question #2](#question-2)
 - [Experiments](#experiments)
 - [Pseudocode](#pseudocode)
 - [Code Demonstration](#code-demonstration)
@@ -40,27 +42,40 @@ Proxy-tuning incorporates a fine-tuned smaller model (the expert) and its untune
 
 ## Methodology
 
+### Build Expert and Anti-Expert Models
+
 The goal is to adjust the outputs of a large language model (referred to as M) by using two smaller models:
 
-- An expert model (M+): This model has been fine-tuned to be good at a certain task.
-- An anti-expert model (M−): This model has been fine-tuned to produce the opposite of the desired outcome.
-Both M+ and M− are smaller and easier to fine-tune than the large model M.
+- An expert model (M+): Suppose we have a small pretrained model M-, which we will tune directly to obtain M+. This M+ model has been fine-tuned to be good at a certain task.
+- An anti-expert model (M−): This model is the same as M+ but has not been fine-tuned. M- does not need to be in the same model family as M, but it should share the same vocabulary with M.
+
+**Logits** refer to the output just before the final layer, which is the model's raw output values before being transformed into probabilities by an activation function like softmax.
+
+**Decoding-time experts** (Liu et al., 2021) is a specific strategy involves dynamically incorporating external knowledge or specific guidance during the model's decoding phase to influence the generated outputs, where this guidance often comes from other pretrained models, referred to as "experts". A common method is to adjust the **logits** of the generated words at decoding time, which can dynamically increasing or decreasing the probability of certain words based on the outputs of expert models.
+
+For here, we apply decoding-time experts, Proxy-tuning operates on M's output distribution over next word by adding a logit offest for every token, determined by the difference between logits from M- and M+.
+
+### Question 1
+Why we call the model M+ as expert model and M- as anti-expert model?
+<details open>
+<summary>Answer</summary>
+<br>
+The expert model (M+)'s logits are additively combined and the anti-expert model (M-)'s logits are negatively combined with the base model M's logits.
+</details>
 
 Here's how it works:
 
 - When  give an input xt(like a sentence or question) to the model,  also pass it to both M+ and M−.
-- M+ and M− process the input and produce a set of scores for all possible outputs (like words or phrases that could come next).
-- M+’s scores are added to M’s original scores, and - M−’s scores are subtracted from them. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
-- After adjusting M’s scores with the scores from M+ and M−, the model uses a function called "softmax" to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
-
-![method section formula](figures/figure_2.png)
-
-This method effectively "steers" the large model to produce outputs more like what we want (based on M+) and avoid what we don’t want (based on M−), without having to go through the costly process of fine-tuning M directly.
+- M+ and M− process the input and produce logit scores for all possible outputs (like words or phrases that could come next).
+- M+’s scores are added to M’s original logit scores, and M−’s logit scores are subtracted from them. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
+- After adjusting M’s logit scores with the scores from M+ and M−, the model uses softmax function to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
 
 ![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
+![method section formula](figures/figure_2.png)
+
 ## Discussion Question for the Class
-### Question #1 
+### Question #2
 Is there any backpropagation happening?
 <details open>
 <summary>Answer</summary>
