@@ -71,7 +71,7 @@ The expert model (M+)'s logits are additively combined and the anti-expert model
 
 At each time step $t$, we condition the base model $M$, the expert $M+$, and the anti-expert $M-$ on the prompt x&lt;t, to obtain the logit scores $S_M$, $S_{M+}$, and $S_{M-}$, respectively.
 
-![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
+![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/proxy_model.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
 Here's how it works:
 
@@ -80,7 +80,7 @@ Here's how it works:
 - the offset logit scores of the learned difference between $M-$ and $M+$ are applied to $M$’s original logit scores. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
 - After adjusting $M$’s logit scores with the scores from $M+$ and $M−$, the model uses softmax function to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
 
-![method section formula](figures/figure_2.png)
+![Proxy-tuning Model formula](figures/proxy_model_formula.png)
 
 ### Question 2
 Is there any backpropagation happening?
@@ -101,7 +101,7 @@ Datasets: The evaluation involves four datasets: GSM for arithmetic word problem
 
 Results: The method effectively closes the performance gap between untuned base models and their tuned CHAT counterparts by a significant margin.
 
-![Results for instruction-tuning](figures/figure_4.png)
+![Results for instruction-tuning](figures/result_instuction_tuning.png)
 
 ### Code Adaptation Experiments
 This section refined the approach to training language models for code-related tasks. Here's a brief on the models used:
@@ -111,7 +111,7 @@ Base model (7B-CODE): Considered the domain expert (M+), this model is a special
 Counterfactual (7B-BASE): This model serves as the non-expert (M-), the original LLAMA2-7B before any specialized training on code.
 
 #### Results Overview
-![method section formula](figures/figure_3.png)
+![Result for code adaption](figures/highlighted_result_code_adaption.png)
 Figure: Highlighted results from Table 4 - Pay special attention to "7B Directly tuned" and the lower "Proxy-tuning" score for the 13B model.
 
 the models were tested on the Pass@10 metric, which evaluates whether at least one correct answer is produced in ten attempts. Here's what we found:
