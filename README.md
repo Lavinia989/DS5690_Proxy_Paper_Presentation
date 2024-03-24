@@ -77,7 +77,7 @@ Here's how it works:
 - When  give an input $xt$(like a sentence or question) to the model,  also pass it to both $M+$ and $M−$.
 - $M+$ and $M−$ process the input and produce logit scores for all possible outputs (like words or phrases that could come next).
 - the offset logit scores of the learned difference between $M-$ and $M+$ are applied to $M$’s original logit scores. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
-- After adjusting $M$’s logit scores with the scores from $M+$ and $M−$, the model uses $softmax$ function to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
+- After adjusting $M$’s logit scores with the scores from $M+$ and $M−$, the model uses softmax function to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
 
 ![method section formula](figures/figure_2.png)
 
