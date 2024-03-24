@@ -11,7 +11,6 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
     - [Build Expert and Anti-Expert Models](#build-expert-and-anti-expert-models)
     - [Question 1](#question-1)
     - [Calculation of the logit scores at each time step](#calculation-of-the-logit-scores-at-each-time-step)
-- [Discussion Question for the Class](#discussion-question-for-the-class)
     - [Question 2](#question-2)
 - [Experiments](#experiments)
    - [Code Adaptation Experiments](#code-adaptation-experiments)
@@ -80,7 +79,6 @@ Here's how it works:
 
 ![method section formula](figures/figure_2.png)
 
-## Discussion Question for the Class
 ### Question 2
 Is there any backpropagation happening?
 <details open>
