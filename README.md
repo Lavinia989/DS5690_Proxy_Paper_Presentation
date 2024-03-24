@@ -125,6 +125,7 @@ Normally, we'd expect a larger model to perform better due to more capacity for 
 
 
 ## Pseudocode
+![Pseudocode](figures/pseudocode.png)
 
 ## Critical Analysis
 ### Overlooked Aspects by the Authors
