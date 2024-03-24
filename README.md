@@ -67,7 +67,7 @@ The expert model (M+)'s logits are additively combined and the anti-expert model
 
 ### Calculation of the logit scores at each time step
 
-At each time step $t$, we condition the base model $M$, the expert $M+$, and the anti-expert $M-$ on the prompt ```${x_<t}$```, to obtain the logit scores $S_M$, $S_{M+}$, and $S_{M-}$, respectively.
+At each time step $t$, we condition the base model $M$, the expert $M+$, and the anti-expert $M-$ on the prompt x&lt;t, to obtain the logit scores $S_M$, $S_{M+}$, and $S_{M-}$, respectively.
 
 ![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
