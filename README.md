@@ -14,7 +14,6 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
     - [Question #2](#question-2)
 - [Experiments](#experiments)
    - [Code Adaptation Experiments](#code-adaptation-experiments)
-- Code Adaptation Experiments
 - [Pseudocode](#pseudocode)
 - [Code Demonstration](#code-demonstration)
 - [Critical Analysis](#critical-analysis)
@@ -88,10 +87,24 @@ No, backpropagation is not needed for proxy tuning. Proxy tuning adjusts the beh
 ## Experiments
 
 ### Code Adaptation Experiments
-In this section, the authors refined the approach to training language models for code-related tasks. Here's a brief on the models used:
+this section refined the approach to training language models for code-related tasks. Here's a brief on the models used:
 
 Base model (7B-CODE): Considered the domain expert (M+), this model is a specialized version of the original LLAMA2-7B, fine-tuned for Python code generation.
+
 Counterfactual (7B-BASE): This model serves as the non-expert (M-), the original LLAMA2-7B before any specialized training on code.
+
+#### Results Overview
+![table 4 for the code expereiment](figures/figure_3.png)
+Figure: Highlighted results from Table 4 - Pay special attention to "7B Directly tuned" and the lower "Proxy-tuning" score for the 13B model.
+
+the models were tested on the Pass@10 metric, which evaluates whether at least one correct answer is produced in ten attempts. Here's what we found:
+
+- 7B Directly Tuned: This model achieved 68.9% on CodexEval and 53.6% on DS-1000, surpassing its proxy-tuned counterpart.
+
+- 13B Proxy-Tuned: Despite the larger size, the proxy-tuned 13B model scored lower than the directly tuned 7B, with 65.7% on CodexEval and 42.8% on DS-1000.
+
+#### Summary 
+Normally, we'd expect a larger model to perform better due to more capacity for learning and understanding complex patterns, but the results suggest that just scaling up the model size does not guarantee better performance when it comes to proxy-tuning. It could be that the specific expertise developed in the smaller model doesn't transfer as effectively when scaled up through proxy-tuning. larger pretraining scale means that for general tasks, having a larger model usually provides more knowledge and better performance. But when a smaller model has been specifically tuned for a task (like the CODELLAMA-7B-PYTHON has been for Python code), simply having a larger model does not automatically mean better performance in that narrow domain.
 
 ## Critical Analysis
 ### Overlooked Aspects by the Authors
