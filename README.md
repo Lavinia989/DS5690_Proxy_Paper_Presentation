@@ -13,6 +13,8 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
 - [Discussion Question for the Class](#discussion-question-for-the-class)
     - [Question #2](#question-2)
 - [Experiments](#experiments)
+   - [Code Adaptation Experiments](#code-adaptation-experiments)
+- Code Adaptation Experiments
 - [Pseudocode](#pseudocode)
 - [Code Demonstration](#code-demonstration)
 - [Critical Analysis](#critical-analysis)
@@ -82,6 +84,14 @@ Is there any backpropagation happening?
 <br>
 No, backpropagation is not needed for proxy tuning. Proxy tuning adjusts the behavior of a large pre-trained model by using the outputs of smaller models, often referred to as experts and anti-experts, at inference time without changing the parameters of the original large model. This approach essentially steers the output of the large model using the predictions from the smaller models, so the costly and time-consuming backpropagation process used in traditional fine-tuning to update model weights is not required. By the way fine-tune does involved if we need to fine-tune the M+ expert model by ourselves.
 </details>
+
+## Experiments
+
+### Code Adaptation Experiments
+In this section, the authors refined the approach to training language models for code-related tasks. Here's a brief on the models used:
+
+Base model (7B-CODE): Considered the domain expert (M+), this model is a specialized version of the original LLAMA2-7B, fine-tuned for Python code generation.
+Counterfactual (7B-BASE): This model serves as the non-expert (M-), the original LLAMA2-7B before any specialized training on code.
 
 ## Critical Analysis
 ### Overlooked Aspects by the Authors
