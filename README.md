@@ -10,8 +10,9 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
 - [Methodology](#methodology)
     - [Build Expert and Anti-Expert Models](#build-expert-and-anti-expert-models)
     - [Question 1](#question-1)
+    - [Calculation of the logit scores at each time step](#calculation-of-the-logit-scores-at-each-time-step)
 - [Discussion Question for the Class](#discussion-question-for-the-class)
-    - [Question #2](#question-2)
+    - [Question 2](#question-2)
 - [Experiments](#experiments)
    - [Code Adaptation Experiments](#code-adaptation-experiments)
 - [Pseudocode](#pseudocode)
@@ -50,7 +51,7 @@ The goal is to adjust the outputs of a large language model (referred to as M) b
 - An expert model (M+): Suppose we have a small pretrained model M-, which we will tune directly to obtain M+. This M+ model has been fine-tuned to be good at a certain task.
 - An anti-expert model (M−): This model is the same as M+ but has not been fine-tuned. M- does not need to be in the same model family as M, but it should share the same vocabulary with M.
 
-**Logits** refer to the output just before the final layer, which is the model's raw output values before being transformed into probabilities by an activation function like softmax.
+**Logits** refer to the unnormalized unnormalized scores just before the final layer, which is the model's raw output values before being transformed into probabilities by an activation function like softmax.
 
 **Decoding-time experts** (Liu et al., 2021) is a specific strategy involves dynamically incorporating external knowledge or specific guidance during the model's decoding phase to influence the generated outputs, where this guidance often comes from other pretrained models, referred to as "experts". A common method is to adjust the **logits** of the generated words at decoding time, which can dynamically increasing or decreasing the probability of certain words based on the outputs of expert models.
 
@@ -64,19 +65,23 @@ Why we call the model M+ as expert model and M- as anti-expert model?
 The expert model (M+)'s logits are additively combined and the anti-expert model (M-)'s logits are negatively combined with the base model M's logits.
 </details>
 
+### Calculation of the logit scores at each time step
+
+At each time step t, we condition the base model M, the expert M+, and the anti-expert M- on the prompt \(x_{<t}\), to obtain the logit scores SM, SM+, and SM-, respectively.
+
+![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
+
 Here's how it works:
 
 - When  give an input xt(like a sentence or question) to the model,  also pass it to both M+ and M−.
 - M+ and M− process the input and produce logit scores for all possible outputs (like words or phrases that could come next).
-- M+’s scores are added to M’s original logit scores, and M−’s logit scores are subtracted from them. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
+- the offset logit scores of the learned difference between M- and M+ are applied to M’s original logit scores. This is like saying, “Give me more of what M+ suggests and less of what M− doesn’t want.”
 - After adjusting M’s logit scores with the scores from M+ and M−, the model uses softmax function to turn these scores into probabilities, which determines the likelihood of each possible output being the correct one.
-
-![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/figure_1.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
 ![method section formula](figures/figure_2.png)
 
 ## Discussion Question for the Class
-### Question #2
+### Question 2
 Is there any backpropagation happening?
 <details open>
 <summary>Answer</summary>
