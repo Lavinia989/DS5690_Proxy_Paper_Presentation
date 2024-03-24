@@ -14,6 +14,8 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
     - [Question 2](#question-2)
 - [Experiments](#experiments)
    - [Code Adaptation Experiments](#code-adaptation-experiments)
+    - [Results Overview](#results-overview)
+    - [Summary](#summary)
 - [Pseudocode](#pseudocode)
 - [Code Demonstration](#code-demonstration)
 - [Critical Analysis](#critical-analysis)
