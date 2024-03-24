@@ -94,7 +94,7 @@ Base model (7B-CODE): Considered the domain expert (M+), this model is a special
 Counterfactual (7B-BASE): This model serves as the non-expert (M-), the original LLAMA2-7B before any specialized training on code.
 
 #### Results Overview
-![table 4 for the code expereiment](figures/figure_3.png)
+![method section formula](figures/figure_3.png)
 Figure: Highlighted results from Table 4 - Pay special attention to "7B Directly tuned" and the lower "Proxy-tuning" score for the 13B model.
 
 the models were tested on the Pass@10 metric, which evaluates whether at least one correct answer is produced in ten attempts. Here's what we found:
