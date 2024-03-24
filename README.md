@@ -123,6 +123,9 @@ the models were tested on the Pass@10 metric, which evaluates whether at least o
 #### Summary 
 Normally, we'd expect a larger model to perform better due to more capacity for learning and understanding complex patterns, but the results suggest that just scaling up the model size does not guarantee better performance when it comes to proxy-tuning. It could be that the specific expertise developed in the smaller model doesn't transfer as effectively when scaled up through proxy-tuning. larger pretraining scale means that for general tasks, having a larger model usually provides more knowledge and better performance. But when a smaller model has been specifically tuned for a task (like the CODELLAMA-7B-PYTHON has been for Python code), simply having a larger model does not automatically mean better performance in that narrow domain.
 
+
+## Pseudocode
+
 ## Critical Analysis
 ### Overlooked Aspects by the Authors
 #### Model Upper Limit
