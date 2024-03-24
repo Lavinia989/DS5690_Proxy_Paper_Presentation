@@ -13,6 +13,7 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
     - [Calculation of the logit scores at each time step](#calculation-of-the-logit-scores-at-each-time-step)
     - [Question 2](#question-2)
 - [Experiments](#experiments)
+    - [Instruction-Tuning Experiments](#instruction-tuning-experiments)
    - [Code Adaptation Experiments](#code-adaptation-experiments)
     - [Results Overview](#results-overview)
     - [Summary](#summary)
@@ -91,8 +92,19 @@ No, backpropagation is not needed for proxy tuning. Proxy tuning adjusts the beh
 
 ## Experiments
 
+### Instruction-Tuning Experiments
+Base Model ($M$): steer 13B- and 70B-BASE
+Expert Model ($M+$): 7B-CHAT
+Anti-Expert Model ($M-$): 7B-BASE
+
+Datasets: The evaluation involves four datasets: GSM for arithmetic word problems, AlpacaFarm for open-ended instructions, Toxigen for assessing model responses to hateful statements, and TruthfulQA for handling misleading questions.
+
+Results: The method effectively closes the performance gap between untuned base models and their tuned CHAT counterparts by a significant margin.
+
+![Results for instruction-tuning](figures/figure_4.png)
+
 ### Code Adaptation Experiments
-this section refined the approach to training language models for code-related tasks. Here's a brief on the models used:
+This section refined the approach to training language models for code-related tasks. Here's a brief on the models used:
 
 Base model (7B-CODE): Considered the domain expert (M+), this model is a specialized version of the original LLAMA2-7B, fine-tuned for Python code generation.
 
