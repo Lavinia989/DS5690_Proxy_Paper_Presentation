@@ -143,3 +143,8 @@ The combination of different domain-specific experts in Proxy-Tuning raises ques
 - Code example for Proxy tuning: https://lightning.ai/lightning-ai/studios/improve-llms-with-proxy-tuning
 - A deep dive into the paper "Tuning Language Models by Proxy", offering a clear explanation of the process and the benefits of proxy tuning​. https://foundationflow.ai/tune-language-models-with-proxy-tuning/
 - Explore a valuable discussion on Reddit about the paper: https://www.reddit.com/r/LocalLLaMA/comments/19dg8pk/new_paper_proxytuning_an_efficient_alternative_to/
+
+## Citation
+1. Liu, A., Han, X., Wang, Y., Tsvetkov, Y., Choi, Y., & Smith, N. A. (2024). Tuning language models by proxy. arXiv preprint arXiv:2401.08565.
+
+2. Liu, A., Sap, M., Lu, X., Swayamdipta, S., Bhagavatula, C., Smith, N. A., & Choi, Y. (2021). DExperts: Decoding-time controlled text generation with experts and anti-experts. arXiv preprint arXiv:2105.03023.
