@@ -127,6 +127,9 @@ Normally, we'd expect a larger model to perform better due to more capacity for 
 ## Pseudocode
 ![Pseudocode](figures/pseudocode.png)
 
+## Code Demonstration
+google colab: https://colab.research.google.com/drive/163mpohPGnOkEatj_TE5ei_kZMXvuLMDA#scrollTo=DgerY98rlD7F
+
 ## Critical Analysis
 ### Overlooked Aspects by the Authors
 #### Model Upper Limit
