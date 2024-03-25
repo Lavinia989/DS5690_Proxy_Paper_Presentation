@@ -124,7 +124,7 @@ The LLAMA2 models used in the experiments are as follows:
 - Base Model ($M$): 13B- and 70B-BASE
 
 Two benchmarks for evaluation:
-- **CodexEval**: requires the model to write a Python function based on a given function signature and description,
+- **CodexEval**: require the model to write a Python function based on a given function signature and description,
 - **DS-1000**: Python programming problems from Stack Overflow. 
 
 #### Results Overview
