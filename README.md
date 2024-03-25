@@ -40,7 +40,7 @@ Proxy-tuning incorporates a fine-tuned smaller model (the expert) and its untune
   
 - **Leveraging Smaller Models:** Employing a fine-tuned expert model alongside an untuned anti-expert model. The expert encapsulates the specific enhancements or knowledge from fine-tuning, while the anti-expert provides a baseline reference. These models are significantly smaller, making them less resource-intensive to fine-tune and manage.
 
-- **Steering the Larger Model Efficiently:** By applying the differences in predictions between the expert and anti-expert to the base model's predictions, proxy-tuning steers the larger model towards the desired behavior at decoding time, leveraging the computational efficiency and flexibility of not having to retrain or modify the large base model.
+- **Steering the Larger Model Efficiently:** By applying the differences in predictions between the expert and anti-expert to the base large model's predictions, proxy-tuning steers the large model towards the desired behavior at decoding time, leveraging the computational efficiency and flexibility of not having to retrain or modify the base large model.
 
 - **Applying Adjustments while Preserving Privacy:** Proxy-tuning shifts the original predictions of the larger model in the direction of the difference that results from tuning by not requiring access to the internal weights of the larger model.
 
@@ -64,12 +64,12 @@ Why we call the model M+ as expert model and M- as anti-expert model?
 <details open>
 <summary>Answer</summary>
 <br>
-The expert model (M+)'s logits are additively combined and the anti-expert model (M-)'s logits are negatively combined with the base model M's logits.
+The expert model (M+)'s logits are additively combined and the anti-expert model (M-)'s logits are negatively combined with the base large model M's logits.
 </details>
 
 ### Calculation of the logit scores at each time step
 
-At each time step $t$, we condition the base model $M$, the expert $M+$, and the anti-expert $M-$ on the prompt x&lt;t, to obtain the logit scores $S_M$, $S_{M+}$, and $S_{M-}$, respectively.
+At each time step $t$, we condition the base large model $M$, the expert $M+$, and the anti-expert $M-$ on the prompt x&lt;t, to obtain the logit scores $S_M$, $S_{M+}$, and $S_{M-}$, respectively.
 
 ![Proxy-tuning adjusts a large pretrained model's predictions using the logit differences from a fine-tuned "expert" and an untuned "anti-expert," without changing the model's internal weights.](figures/proxy_model.png "Proxy-Tuning: Steering Pretrained Models with Expert Logit Differences")
 
@@ -101,7 +101,7 @@ LLAMA2 family of models, which includes both BASE models pretrained on text, and
 
 The LLAMA2 models used in the experiments are as follows:
 
-Base Model ($M$): 13B- and 70B-BASE
+Base Large Model ($M$): 13B- and 70B-BASE
 
 Expert Model ($M+$): 7B-CHAT
 
@@ -109,7 +109,7 @@ Anti-Expert Model ($M-$): 7B-BASE
 
 Datasets: The evaluation involves four datasets: GSM for arithmetic word problems, AlpacaFarm for open-ended instructions, Toxigen for assessing model responses to hateful statements, and TruthfulQA for handling misleading questions.
 
-Results: The method effectively closes the performance gap between untuned base models and their tuned CHAT counterparts by a significant margin.
+Results: The method effectively closes the performance gap between untuned base large models and their tuned CHAT counterparts by a significant margin.
 
 ![Results for instruction-tuning](figures/result_instuction_tuning.png)
 
@@ -123,7 +123,7 @@ The LLAMA2 models used in the experiments are as follows:
 
 - Anti-Expert Model ($M-$): The original 7B-BASE model.
 
-- Base Model ($M$): 13B- and 70B-BASE
+- Base Large Model ($M$): 13B- and 70B-BASE
 
 Two benchmarks for evaluation:
 - **CodexEval**: require the model to write a Python function based on a given function signature and description,
@@ -151,7 +151,7 @@ google colab: https://colab.research.google.com/drive/163mpohPGnOkEatj_TE5ei_kZM
 ## Critical Analysis
 ### Overlooked Aspects by the Authors
 #### Model Upper Limit
-The paper does not fully address the inherent limitations of the base large language model (LLM). It posits that Proxy-Tuning can effectively steer the output of the LLM towards the desired knowledge domain. However, it underestimates the "upper limit" of the LLM's capability. If the base model cannot generate the correct answer within a reasonable number of attempts, the effectiveness of logit adjustment becomes negligible. This suggests a need for clearer acknowledgment of the base model's knowledge constraints.
+The paper does not fully address the inherent limitations of the base large language model (LLM). It posits that Proxy-Tuning can effectively steer the output of the LLM towards the desired knowledge domain. However, it underestimates the "upper limit" of the LLM's capability. If the base large model cannot generate the correct answer within a reasonable number of attempts, the effectiveness of logit adjustment becomes negligible. This suggests a need for clearer acknowledgment of the base large model's knowledge constraints.
 
 ### Areas for Further Development
 #### Delving into the "Black Box"
