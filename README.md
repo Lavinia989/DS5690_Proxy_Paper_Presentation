@@ -171,7 +171,7 @@ The core insight of the paper shows the pivotal role of the expert and anti-expe
 
 The performance of the fine-tuned model largely depends on the nuanced differences between the expert and anti-expert models, but the criteria for what constitutes the optimal expert model in a given scenario are elusive, necessitating extensive experimentation with various small models to identify the most effective combination.
 
-How can we systematically and efficiently determine the optimal expert model for fine-tuning purposes? The answer to this question is not straightforward, given the complex interplay between the base model's pre-existing knowledge and the directional guidance provided by the expert and anti-expert models. 
+How can we systematically and efficiently determine the optimal expert model for fine-tuning purposes? The answer to this question is not straightforward, given the complex interplay between the base large model's pre-existing knowledge and the directional guidance provided by the expert and anti-expert models. 
 
 As such, further research and exploration into methodologies for evaluating and selecting expert models, potentially involving meta-learning strategies or performance prediction models, could unlock the full potential of proxy-tuning.
 
