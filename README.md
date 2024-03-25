@@ -100,8 +100,11 @@ This section evaluated the application of proxy-tuning to instruction-tune a mod
 LLAMA2 family of models, which includes both BASE models pretrained on text, and CHAT models which are further aligned for dialogue, which are supervised for instruction-tuning and reinforcement learning from human feedback. The models have variants at 7B, 13B, and 70B parameters.
 
 The LLAMA2 models used in the experiments are as follows:
+
 Base Model ($M$): 13B- and 70B-BASE
+
 Expert Model ($M+$): 7B-CHAT
+
 Anti-Expert Model ($M-$): 7B-BASE
 
 Datasets: The evaluation involves four datasets: GSM for arithmetic word problems, AlpacaFarm for open-ended instructions, Toxigen for assessing model responses to hateful statements, and TruthfulQA for handling misleading questions.
