@@ -53,7 +53,7 @@ The goal is to adjust the outputs of a large language model (referred to as M) b
 - An expert model (M+): Suppose we have a small pretrained model M-, which we will tune directly to obtain M+. This M+ model has been fine-tuned to be good at a certain task.
 - An anti-expert model (M−): This model is the same as M+ but has not been fine-tuned. M- does not need to be in the same model family as M, but it should share the same vocabulary with M.
 
-**Logits** refer to the unnormalized unnormalized scores just before the final layer, which is the model's raw output values before being transformed into probabilities by an activation function like softmax.
+**Logits** refer to the unnormalized scores just before the final layer, which is the model's raw output values before being transformed into probabilities by an activation function like softmax.
 
 **Decoding-time experts** (Liu et al., 2021) is a specific strategy involves dynamically incorporating external knowledge or specific guidance during the model's decoding phase to influence the generated outputs, where this guidance often comes from other pretrained models, referred to as "experts". A common method is to adjust the **logits** of the generated words at decoding time, which can dynamically increasing or decreasing the probability of certain words based on the outputs of expert models.
 
