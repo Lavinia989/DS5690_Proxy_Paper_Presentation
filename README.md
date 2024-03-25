@@ -87,13 +87,20 @@ Is there any backpropagation happening?
 <details open>
 <summary>Answer</summary>
 <br>
-No, backpropagation is not needed for proxy tuning. Proxy tuning adjusts the behavior of a large pre-trained model by using the outputs of smaller models, often referred to as experts and anti-experts, at inference time without changing the parameters of the original large model. This approach essentially steers the output of the large model using the predictions from the smaller models, so the costly and time-consuming backpropagation process used in traditional fine-tuning to update model weights is not required. By the way fine-tune does involved if we need to fine-tune the M+ expert model by ourselves.
+No, backpropagation is not needed for proxy-tuning. Proxy tuning adjusts the behavior of a large pre-trained model by using the outputs of smaller models, often referred to as experts and anti-experts, at inference time without changing the parameters of the original large model. This approach essentially steers the output of the large model using the predictions from the smaller models, so the costly and time-consuming backpropagation process used in traditional fine-tuning to update model weights is not required. 
+
+By the way fine-tune does involved if we need to fine-tune the M+ expert model by ourselves.
 </details>
 
 ## Experiments
 
 ### Instruction-Tuning Experiments
-Base Model ($M$): steer 13B- and 70B-BASE
+This section evaluated the application of proxy-tuning to instruction-tune a model at decoding-time. 
+
+LLAMA2 family of models, which includes both BASE models pretrained on text, and CHAT models which are further aligned for dialogue, which are supervised for instruction-tuning and reinforcement learning from human feedback. The models have variants at 7B, 13B, and 70B parameters.
+
+The LLAMA2 models used in the experiments are as follows:
+Base Model ($M$): 13B- and 70B-BASE
 Expert Model ($M+$): 7B-CHAT
 Anti-Expert Model ($M-$): 7B-BASE
 
@@ -104,11 +111,14 @@ Results: The method effectively closes the performance gap between untuned base 
 ![Results for instruction-tuning](figures/result_instuction_tuning.png)
 
 ### Code Adaptation Experiments
-This section refined the approach to training language models for code-related tasks. Here's a brief on the models used:
+This section refined the approach to training language models for code-related tasks. 
 
-Base model (7B-CODE): Considered the domain expert (M+), this model is a specialized version of the original LLAMA2-7B, fine-tuned for Python code generation.
+The LLAMA2 models used in the experiments are as follows:
+Base Model ($M$): 13B- and 70B-BASE
 
-Counterfactual (7B-BASE): This model serves as the non-expert (M-), the original LLAMA2-7B before any specialized training on code.
+Expert Model ($M+$): CODELLAMA-7B-PYTHON (7B-CODE), which is a specialized version of the original LLAMA2-7B fine-tuned for Python code generation.
+
+Anti-Expert Model ($M-$): The original 7B-BASE model.
 
 #### Results Overview
 ![Result for code adaption](figures/highlighted_result_code_adaption.png)
@@ -122,7 +132,6 @@ the models were tested on the Pass@10 metric, which evaluates whether at least o
 
 #### Summary 
 Normally, we'd expect a larger model to perform better due to more capacity for learning and understanding complex patterns, but the results suggest that just scaling up the model size does not guarantee better performance when it comes to proxy-tuning. It could be that the specific expertise developed in the smaller model doesn't transfer as effectively when scaled up through proxy-tuning. larger pretraining scale means that for general tasks, having a larger model usually provides more knowledge and better performance. But when a smaller model has been specifically tuned for a task (like the CODELLAMA-7B-PYTHON has been for Python code), simply having a larger model does not automatically mean better performance in that narrow domain.
-
 
 ## Pseudocode
 ![Pseudocode](figures/pseudocode.png)
