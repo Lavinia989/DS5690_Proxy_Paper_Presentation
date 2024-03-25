@@ -117,11 +117,15 @@ This section refined the approach to training language models for code-related t
 
 The LLAMA2 models used in the experiments are as follows:
 
-Expert Model ($M+$): CODELLAMA-7B-PYTHON (7B-CODE), which is a specialized version of the original LLAMA2-7B fine-tuned for Python code generation.
+- Expert Model ($M+$): CODELLAMA-7B-PYTHON (7B-CODE), which is a specialized version of the original LLAMA2-7B fine-tuned for Python code generation.
 
-Anti-Expert Model ($M-$): The original 7B-BASE model.
+- Anti-Expert Model ($M-$): The original 7B-BASE model.
 
-Base Model ($M$): 13B- and 70B-BASE
+- Base Model ($M$): 13B- and 70B-BASE
+
+Two benchmarks for evaluation:
+- **CodexEval**: requires the model to write a Python function based on a given function signature and description,
+- **DS-1000**: Python programming problems from Stack Overflow. 
 
 #### Results Overview
 ![Result for code adaption](figures/highlighted_result_code_adaption.png)
