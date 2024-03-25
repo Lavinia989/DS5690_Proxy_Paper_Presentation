@@ -24,6 +24,8 @@ Presenter: Yitian(Ewan) Long & Yunfei Lyu
         - [Delving into the "Black Box"](#delving-into-the-black-box)
         - [Resolving Conflicts Between Multiple Experts](#resolving-conflicts-between-multiple-experts)
 - [Conclusion & Discussion](#conclusion--discussion)
+    - [Conclusion](#conclusion)
+    - [Discussion](#discussion)
 - [Additional Resources](#additional-resources)
 - [Citation](#citation)
   
@@ -158,6 +160,20 @@ While the paper endeavors to understand the reasoning behind knowledge transfer 
 #### Resolving Conflicts Between Multiple Experts
 The combination of different domain-specific experts in Proxy-Tuning raises questions about potential errors and conflicts in guidance. The current paper does not explore the scenario where multiple expert models may provide conflicting adjustments to the base LLM. This could lead to a compromised or confused model output. Future research could develop a framework for conflict resolution or a harmonious integration of insights from multiple experts, enhancing the robustness of the Proxy-Tuning approach.
 
+## Conclusion & Discussion
+### Conclusion
+The paper introduces an innovative approach to Large Language Model (LLM) fine-tuning through proxy-tuning, leveraging the contrast between expert and anti-expert models.
+
+Our experiments demonstrate that proxy-tuning can close dignificant performance gaps across a variety of tasks, and these results underline the efficiency of using proxy-tuning through decoding-time guidance, offering a efficient and privacy-preserving alternative to traditional fine-tuning methods.
+
+### Discussion
+The core insight of the paper shows the pivotal role of the expert and anti-expert models in determining the effectiveness of the fine-tuning process. However, the challenge of identifying the optimal expert model remains a hurdle.
+
+The performance of the fine-tuned model largely depends on the nuanced differences between the expert and anti-expert models, but the criteria for what constitutes the optimal expert model in a given scenario are elusive, necessitating extensive experimentation with various small models to identify the most effective combination.
+
+How can we systematically and efficiently determine the optimal expert model for fine-tuning purposes? The answer to this question is not straightforward, given the complex interplay between the base model's pre-existing knowledge and the directional guidance provided by the expert and anti-expert models. 
+
+As such, further research and exploration into methodologies for evaluating and selecting expert models, potentially involving meta-learning strategies or performance prediction models, could unlock the full potential of proxy-tuning.
 
 ## Additional Resources
 
